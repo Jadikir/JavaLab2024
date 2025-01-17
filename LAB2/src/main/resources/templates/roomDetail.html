@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Комната</title>
+</head>
+<body>
+<h1>Информация о комнате</h1>
+<p>ID: <span th:text="${room.id}"></span></p>
+<p>Название: <span th:text="${room.name}"></span></p>
+<a href="/rooms">Назад к списку</a>
+</body>
+</html>

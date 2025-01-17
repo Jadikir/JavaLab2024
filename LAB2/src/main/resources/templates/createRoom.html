@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Создать комнату</title>
+</head>
+<body>
+<h1>Создание комнаты</h1>
+<form action="/rooms/create" method="post">
+  <label for="name">Название:</label>
+  <input type="text" id="name" name="name" required><br><br>
+
+  <label for="capacity">Вместимость:</label>
+  <input type="number" id="capacity" name="capacity" required><br><br>
+
+  <button type="submit">Создать</button>
+</form>
+<a href="/rooms">Назад к списку</a>
+</body>
+</html>

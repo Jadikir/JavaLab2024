@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Bookings</title>
+</head>
+<body>
+<h1>All Bookings</h1>
+
+<!-- Таблица для отображения всех бронирований -->
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Room</th>
+        <th>Start Time</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Перебираем все бронирования и отображаем их -->
+    <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.id}"></td>
+        <td th:text="${booking.room.name}"></td>
+        <td th:text="${booking.startTime}"></td>
+        <td>
+            <!-- Кнопки для действий с бронированиями -->
+            <a th:href="@{/bookings/delete/{id}(id=${booking.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/bookings/create">Create New Booking</a>
+</body>
+</html>

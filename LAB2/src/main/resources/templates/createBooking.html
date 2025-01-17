@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Booking</title>
+</head>
+<body>
+<h1>Create New Booking</h1>
+
+<!-- Вывод сообщений об ошибке или успешном создании -->
+<form th:action="@{/bookings/create}" method="POST">
+  <label for="roomId">Комната:</label>
+  <select name="room.id" id="roomId" required>
+    <!-- Здесь выводим список доступных комнат -->
+    <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
+  </select>
+
+  <label for="bookedBy">Забронировано кем:</label>
+  <input type="text" id="bookedBy" name="bookedBy" required>
+
+  <label for="startTime">Время начала:</label>
+  <input type="datetime-local" id="startTime" name="startTime" required>
+
+  <label for="endTime">Время окончания:</label>
+  <input type="datetime-local" id="endTime" name="endTime" required>
+
+  <button type="submit">Создать бронирование</button>
+</form>
+
+<!-- Сообщение об ошибке или успешном выполнении -->
+<div th:if="${message}" class="success">
+  <p th:text="${message}"></p>
+</div>
+<div th:if="${error}" class="error">
+  <p th:text="${error}"></p>
+</div>
+
+<a href="/bookings">Back to Bookings</a>
+</body>
+</html>
