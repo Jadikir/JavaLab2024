@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Сотрудники</title>
+</h:head>
+<h:body>
+    <h2>Создание</h2>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Имя:"/>
+            <h:inputText value="#{userController.user.name}"/>
+            <h:outputLabel value="Почта:"/>
+            <h:inputText value="#{userController.user.email}"/>
+        </h:panelGrid>
+        <h:commandButton value="Создать" action="#{userController.createUser}"/>
+    </h:form>
+
+    <h2>Existing Users</h2>
+    <h:dataTable value="#{userController.users}" var="user" border="1">
+        <h:column>
+            <f:facet name="header">id</f:facet>
+            #{user.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">name</f:facet>
+            #{user.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">email</f:facet>
+            #{user.email}
+        </h:column>
+        <h:column>
+            <f:facet name="header">actions</f:facet>
+            <h:form>
+                <h:commandButton value="Изменить" action="#{userController.editUser(user.id)}"/>
+                <h:commandButton value="Удалить" action="#{userController.deleteUser(user.id)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+    <h:link value="Назад к деталям" outcome="index"/>
+</h:body>
+</html>
+

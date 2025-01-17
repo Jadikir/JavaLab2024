@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Детали</title>
+</h:head>
+<h:body>
+    <h1>Редактирование</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Название:"/>
+            <h:inputText value="#{detailController.detail.name}"/>
+            <h:outputLabel value="Описание:"/>
+            <h:inputTextarea value="#{detailController.detail.description}"/>
+            <h:outputLabel value="Цена:"/>
+            <h:inputText value="#{detailController.detail.price}">
+                <f:convertNumber type="number" pattern="#0.00"/>
+            </h:inputText>
+            <h:outputLabel value="Ответственный:"/>
+            <h:selectOneMenu value="#{detailController.selectedUserId}">
+                <f:selectItems value="#{detailController.users}" var="user" itemLabel="#{user.name}" itemValue="#{user.id}"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+        <h:commandButton value="Обновить" action="#{detailController.updateDetail}"/>
+    </h:form>
+    <h:link value="Назад к списку" outcome="index"/>
+</h:body>
+</html>
+
