@@ -32,7 +32,7 @@ public class RoomService {
     public Room createRoom(Room room) {
         Room savedRoom = roomRepository.save(room);
 
-        // Логирование создания комнаты
+
         changeLogService.logChange(
                 "INSERT",
                 savedRoom.getId(),

@@ -1,6 +1,6 @@
 package com.test.Scheduler.model;
-import jakarta.jms.Queue;
-import org.apache.activemq.command.ActiveMQQueue;
+import jakarta.jms.Topic;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,34 +15,38 @@ import org.springframework.jms.core.JmsTemplate;
 @Configuration
 @EnableJms
 public class JmsConfig {
-
     @Bean
-    public Queue destinationQueue() {
-        return new ActiveMQQueue("change-log-queue");
+    public Topic destinationTopic() {
+        return new ActiveMQTopic("change-log-topic");
     }
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-        connectionFactory.setBrokerURL("tcp://localhost:61616"); // Пример брокера
+        connectionFactory.setBrokerURL("tcp://localhost:61616");
         return connectionFactory;
     }
 
     @Bean
     public SingleConnectionFactory singleConnectionFactory(ActiveMQConnectionFactory connectionFactory) {
-        return new SingleConnectionFactory(connectionFactory);
+        SingleConnectionFactory singleConnectionFactory = new SingleConnectionFactory(connectionFactory);
+        singleConnectionFactory.setClientId("my-client-id");
+        return singleConnectionFactory;
     }
+
 
     @Bean
     public JmsTemplate jmsTemplate(SingleConnectionFactory singleConnectionFactory) {
         return new JmsTemplate(singleConnectionFactory);
     }
 
-    // Настройка фабрики для слушателей JMS
+
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(SingleConnectionFactory singleConnectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(singleConnectionFactory);
+        factory.setPubSubDomain(true);
+        factory.setSubscriptionDurable(true);
         return factory;
     }
 }

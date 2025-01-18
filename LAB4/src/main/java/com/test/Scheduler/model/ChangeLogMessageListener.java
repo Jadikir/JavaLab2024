@@ -28,7 +28,7 @@ public class ChangeLogMessageListener {
         this.emailSender = emailSender;
     }
 
-    @JmsListener(destination = "change-log-queue")
+    @JmsListener(destination = "change-log-topic", containerFactory = "jmsListenerContainerFactory", subscription = "my-subscription-name")
     public void processMessage(String message) {
         // Разбор сообщения
         Pattern pattern = Pattern.compile("Type: (.*?), ID: (\\d+), Class: (.*?), Details: (.*)");
