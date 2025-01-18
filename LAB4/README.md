@@ -23,3 +23,14 @@ JMS сделали через ActiveMQ
 ![image](https://github.com/user-attachments/assets/05ffafc1-fda9-4dcb-9a9e-64b48d2f10af)
 
 ![image](https://github.com/user-attachments/assets/2eefbac9-c025-42be-9bd6-29d14fd860ef)
+
+
+
+Обновление (Переделал под топик и проверил):
+
+Создал еще одного слушателя, который просто выводит сообщение в коносль:
+
+
+![image](https://github.com/user-attachments/assets/b2e9ddd7-5901-4e6a-b80d-310df5d8deaf)
+
+Работает как для включенного слушателя, так и для выключенного, когда он включится сообщение придет.
